@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+         闭包
+         利用函数嵌套把上次结果进行存储
+        */
+        let fnSub;
+        (function fn() {
+            let count = 0;
+            fnSub = function () {
+                count++;
+                return count
+            }
+        })();
+        console.log(fnSub());
+        console.log(fnSub());
+        console.log(fnSub());
+
+
+        /*
+         工厂设计模式
+
+    
+        */
+        // 父构造函数
+        function CarMaker() { }
+
+        // 父构造函数的方法，用于执行相同或者相似的内容
+        CarMaker.prototype.drive = function () {
+            return "Vroom, I have " + this.doors + " doors";
+        };
+
+        // 静态工厂方法factory
+        CarMaker.factory = function (type) {
+            var constr = type,
+                newcar;
+
+            // 如果指定类型的构造函数不存在则报错
+            if (typeof CarMaker[constr] !== "function") {
+                throw {
+                    name: "Error",
+                    message: constr + " doesn't exist"
+                };
+            }
+
+            // 现在我们确认要用到的构造函数是存在的了
+            // 让它继承自父构造函数，但只继承一次，
+            // 相当于把传入的字符 都整成一个对象，并继承父类
+            // 工厂模式的使用？？？？
+            if (typeof CarMaker[constr].prototype.drive !== "function") {
+               // debugger;
+                CarMaker[constr].prototype = new CarMaker();
+            }
+            // 创建一个新实例,并执行制定的方法
+            newcar = new CarMaker[constr]();
+            // 这里可以选择性地调用一些方法，然后返回实例
+            return newcar;
+        };
+
+        // 创建特定类型的构造函数，分离每个实例的不同之处
+        CarMaker.Compact = function () {
+            this.doors = 4;
+        };
+        CarMaker.Convertible = function () {
+            this.doors = 2;
+        };
+        CarMaker.SUV = function () {
+            this.doors = 24;
+        };
+
+        // 调用
+        var corolla = CarMaker.factory('Compact');
+        // var solstice = CarMaker.factory('Convertible');
+        // var cherokee = CarMaker.factory('SUV');
+        console.log(corolla.drive()); // "Vroom, I have 4 doors"
+        // console.log(solstice.drive());// "Vroom, I have 2 doors"
+        // console.log(cherokee.drive()); // "Vroom, I have 17 doors"
+    </script>
+</body>
+
+</html>

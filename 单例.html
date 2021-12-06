@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*
+     重写构造函数-单例模式
+
+     构造函数 静态属性
+     静态属性只能通过构造函数访问，实例对象是访问不到的
+
+    */
+    function Universe() {
+      // 缓存实例
+      var instance = this;
+
+      // 处理普通逻辑
+      this.start_time = 0;
+      this.bang = "Big";
+      let i = 1;
+      console.log('----', this);
+      // 重写构造函数
+      Universe = function () {
+        // 闭包并不会释放内存，也就是说上次执行完，保留了变量的值
+        // i++;
+        console.log(i);
+        return instance;
+      };
+      //i++;
+      console.log('=====', new Universe());
+    }
+    Universe.prototype.everything1 = true;
+    let uni1_1 = new Universe();
+
+    Universe.prototype.everything = true;
+    let uni1_2 = new Universe();
+    console.log(uni1_2);
+
+    console.log(new Universe() === new Universe());
+    console.log(new Universe().everything);
+    console.log(new Universe().everything1);
+
+
+    /* 
+      将实例放在静态属性中
+    */
+    function Universe1() {
+      Universe1.count = 10;
+      console.log(Universe1.count);
+      // 实例是否已经存在？
+      if (typeof Universe1.instance === "object") {
+        return Universe.instance;
+      }
+
+      // 处理普通逻辑
+      this.start_time = 0;
+      this.bang = "Big";
+
+      // 缓存实例
+      Universe1.instance = this;
+
+      // 隐式return：
+      // return this;
+    }
+    new Universe1();
+
+
+
+
+    function Universe2() {
+      // 缓存实例
+      var instance;
+
+      // 重写构造函数
+      Universe2 = function () {
+        console.log('222------', instance);
+        return instance;
+      };
+      //console.log('222------',this);
+      // 重写prototype属性
+      Universe2.prototype = this;
+
+      // 创建实例, 始终是否只创建一次
+      instance = new Universe2();
+
+      // 重写constructor属性
+      //instance.constructor = Universe2;
+
+      // 其它的功能代码
+      instance.start_time = 0;
+      instance.bang = "Big";
+
+      // 构造函数返回值
+      return instance;
+    }
+    Universe2.prototype.everything = '111';
+    let nuni1 = new Universe2();
+    console.log(Universe2, nuni1);
+    Universe2.prototype.everything1 = '222';
+    // let nuni2 = new Universe2();
+    // let nuni3 = new Universe2();
+    // console.log(nuni1,nuni2, nuni1 === nuni2,nuni3 === nuni2)
+
+    let fn = function () {
+      console.log(2222);
+    }
+
+
+
+    /*
+    相比较而言，使用匿名函数的方式代码易懂, 也清爽一些
+    */
+    var Universe3;
+
+    (function () {
+
+      var instance;
+
+      Universe3 = function Universe3() {
+        console.log('----------', instance);
+        if (instance) {
+          return instance;
+        }
+
+        console.log('this---', this);
+        instance = this;
+        // 功能代码
+        this.start_time = 0;
+        this.bang = "Big";
+      };
+    }());
+    Universe3.prototype.everything = '111';
+    console.log(new Universe3);
+    Universe3.prototype.everything2 = '222';
+    console.log(new Universe3);
+    console.log(new Universe3 == new Universe3);
+
+  // function ConstructorFn(){
+  //   this.bang = 'Big';
+  //   console.log('构造函数this值--',this);
+
+  //   let  obj = {a:1,b:2}
+  //   let fn = function(){
+  //     console.log(obj)
+  //   }
+  //   return obj
+  // }
+  // ConstructorFn.prototype.siz=function(){};
+  // console.log(new ConstructorFn())
+  </script>
+</body>
+
+</html>
