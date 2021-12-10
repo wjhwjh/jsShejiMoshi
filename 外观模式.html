@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+                                                                    外观模式
+                                                                    比较常见的，也是可以很好的用到实际实践中
+                                                        */
+
+        let myObj = {
+            myFn() {
+                console.log('这是一个函数')
+            }
+        }
+
+        console.log('---', myObj)
+
+
+        // 案例
+        var myevent = {
+            // ……
+            stop: function(e) {
+                    // 其它浏览器
+                    if (typeof e.preventDefault === "function") {
+                        e.preventDefault(); // 阻止浏览器默认事件
+                    }
+                    if (typeof e.stopPropagation === "function") {
+                        e.stopPropagation(); // 阻止事件冒泡
+                    }
+                    // IE
+                    if (typeof e.returnValue === "boolean") {
+                        e.returnValue = false;
+                    }
+                    if (typeof e.cancelBubble === "boolean") {
+                        e.cancelBubble = true;
+                    }
+                }
+                // ……
+        };
+        /* 
+        stopPropagation
+        preventDefault
+        */
+    </script>
+</body>
+
+</html>

@@ -51,7 +51,7 @@
             return this.price;
         };
 
-        // 装饰调用函数
+        // 装饰调用函数，装饰函数始终在原型链上
         Sale.prototype.decorate = function(decorator) {
             //debugger;
             var F = function() {},
@@ -81,7 +81,7 @@
         Sale.decorators.fedtax = {
             getPrice: function() {
                 var price = this.uber.getPrice();
-                //console.log('1---', price)
+                console.log('1---', this.uber.getPrice)
 
                 //debugger;
                 price += price * 5 / 100;
@@ -99,17 +99,21 @@
 
         Sale.decorators.money = {
             getPrice: function() {
+                console.log('3---', this.uber.getPrice)
                 return "$" + this.uber.getPrice().toFixed(2);
             }
         };
 
         Sale.decorators.cdn = {
             getPrice: function() {
+                console.log('4---', this.uber.getPrice)
                 return "CDN$ " + this.uber.getPrice().toFixed(2);
             }
         };
 
         // 调用方式
+
+        // 每次调用返回一个对象，下次调用使用这个对象作为调用对象
         var sale = new Sale(100); // 价格是100美元
         sale = sale.decorate('fedtax'); // 加上联邦税
         sale = sale.decorate('quebec'); // 加上省税
@@ -117,6 +121,16 @@
         //console.log('----', sale, sale.getPrice);
         sale.getPrice(); // "$112.88"
         //console.log(sale.getPrice());
+
+
+        
+
+
+
+
+
+
+
     </script>
 </body>
 

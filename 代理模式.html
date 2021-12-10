@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+        代理模式
+        在web应用中，开销最大的操作之一就是网络请求。所以代理模式在这一块发挥到最大限度
+        此时尽可能地合并HTTP请求是有意义的
+        为什么使用代理模式？
+        优势是什么？
+        缺点是什么？
+        可以用在哪些场景
+        
+        */
+
+        /* 
+            代码的流畅度和舒适度
+            读起来流程
+            写起来舒适
+         */
+
+        //预加载代理--图片
+
+        // 创建一个本体对象
+        var myImage = (function () {
+            // 创建标签
+            var imgNode = document.createElement('img');
+            // 添加到页面
+            document.body.appendChild(imgNode);
+            return {
+                // 设置图片的src
+                setSrc: function (src) {
+                    // 更改src
+                    imgNode.src = src;
+                }
+            }
+        })();
+
+
+        // 创建代理对象
+        var proxyImage = (function () {
+            // 创建一个新的img标签
+            var img = new Image;
+            // img 加载完成事件
+            img.onload = function () {
+                console.log(2);
+                // 调用 myImage 替换src方法
+                setTimeout(() => {
+                    console.log('-------',this.src)
+                    myImage.setSrc(this.src);
+                }, 100);
+
+            }
+            return {
+                // 代理设置地址
+                setSrc: function (src) {
+                    console.log(1);
+                    // 预加载 loading
+                    myImage.setSrc('E:/js/img1.png');
+                    // 赋值正常图片地址
+                    img.src = src;
+                }
+            }
+        })();
+        let srcimg = "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fupload-images.jianshu.io%2Fupload_images%2F15535453-6524e07ea5a1e703.png&refer=http%3A%2F%2Fupload-images.jianshu.io&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1641698500&t=80e2c6ac44642501364dcbe85b79fb69";
+
+        //myImage.setSrc(srcimg);
+        proxyImage.setSrc(srcimg);
+
+    </script>
+</body>
+
+</html>
