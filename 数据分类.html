@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let countAll = 21,arr = [];
+        function fn() {
+            let index = 0;
+            let currentCountMax = 0;
+            while (currentCountMax <= countAll) {
+                //debugger;
+               let currentCountMin = index * 10 + 1;
+                currentCountMax = (index + 1) * 10;
+                index++;
+                if (currentCountMax > countAll) {
+                    currentCountMax = countAll;
+                    if (currentCountMin == currentCountMax) {
+                        arr.push({ min: currentCountMin })
+                    } else {
+                        arr.push({ min: currentCountMin, max: currentCountMax })
+                    }
+                    return arr;
+                } else {
+                    arr.push({ min: currentCountMin, max: currentCountMax })
+                }
+            }
+        }
+        fn();
+        console.log(arr)
+    </script>
+</body>
+</html>

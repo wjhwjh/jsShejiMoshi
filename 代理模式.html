@@ -10,6 +10,17 @@
 
 <body>
     <script>
+        /* 函数里的arguments,是一个对象，类似数组，有length属性，但不是数组
+           有一个名称为类数组。因此也没有数组的方法，如果要使用数组的方法要使用call,apply,bind这些方法。
+           arguments.callee是指向函数本身的
+        
+        */ 
+        function fn(){
+            console.log(arguments,arguments.callee)
+        }
+        
+        console.log(fn('a',1,'huizi',2,3,4,[3,4,5]));
+
         /* 
         代理模式
         在web应用中，开销最大的操作之一就是网络请求。所以代理模式在这一块发挥到最大限度
@@ -27,12 +38,24 @@
             写起来舒适
          */
 
+
+
+        /* 
+         创建一个<img/>标签对象，有两种方式
+         一种是使用document的createElement('img')创建，
+         另一种是使用Image构造器创建，创建一个<img/> 标签对象 
+         img标签元素拥有onload事件，   图片加载完毕执行。也就是img.src设置的图片加载完毕
+         后执行。
+        
+        */
         //预加载代理--图片
 
         // 创建一个本体对象
         var myImage = (function () {
             // 创建标签
             var imgNode = document.createElement('img');
+            var img = new Image();
+            console.log(imgNode);
             // 添加到页面
             document.body.appendChild(imgNode);
             return {
@@ -52,11 +75,11 @@
             // img 加载完成事件
             img.onload = function () {
                 console.log(2);
-                // 调用 myImage 替换src方法
-                setTimeout(() => {
-                    console.log('-------',this.src)
+                // 调用 myImage 替换src方法, this代表创建的img对象
+               // setTimeout(() => {
+                    console.log('-------', this.src)
                     myImage.setSrc(this.src);
-                }, 100);
+               // }, 100);
 
             }
             return {
@@ -75,6 +98,44 @@
         //myImage.setSrc(srcimg);
         proxyImage.setSrc(srcimg);
 
+
+        // 缓存代理
+        /* 
+            arguments 在箭头函数中是没有的
+        */
+        var mult = function () {
+            console.log('开始计算乘积',this,arguments);
+            var a = 1;
+            for (var i = 0, l = arguments.length; i < l; i++) {
+                a = a * arguments[i];
+            }
+            return a;
+        };
+
+        var proxyMult = (function () {
+            // 缓存结果
+            var cache = {};
+            // 利用闭包
+            return function () {
+                // 将参数转化为字符串
+                // 
+                var args = Array.prototype.join.call(arguments, ',');
+                // 遍历缓存结果如果存在直接返回结果
+                if (args in cache) {
+                    return cache[args];
+                }
+                console.log('执行次数--',111)
+                console.log('this---',this);
+                let obj={};
+                // 不存在进行计算并保存结果,apply第一个参数是执行函数中this的指向
+                return cache[args] = mult.apply(obj, arguments);
+            }
+        })();
+
+       let m1 = proxyMult( 1, 2, 3, 4 ); // 输出：24 
+       let m2 = proxyMult( 1, 2, 3, 3 ); // 输出：24
+
+       console.log(m1,m2)
     </script>
 </body>
 

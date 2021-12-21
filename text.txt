@@ -1,0 +1,1 @@
+https://github.com/TooBug/javascript.patterns/blob/master/chapter7.markdown
