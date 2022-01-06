@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>保存为images</title>
+    <meta charset="utf-8">
+</head>
+
+<body class="Body">
+    <div class="AllWrap relative">
+
+        <button title="保存为图片" style="position: absolute;top:30px;left:100px;" onclick="saveCanvas()">保 存</button>
+        <a href="" download="下载图.png" id="download"></a>
+
+    </div>
+
+</body>
+<script src="./jquery-1.11.3.min.js"></script>
+
+
+<script src="https://blog-static.cnblogs.com/files/xieyongbin/html2canvas.min.js"></script>
+<script>
+    function saveCanvas() {
+        html2canvas($(".Body")).then(function (canvas) {
+            var imgUri = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+            $("#download").attr("href", imgUri);
+            console.log(imgUri);
+            document.getElementById("download").click();
+        });
+    }
+</script>
+
+</html>

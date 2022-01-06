@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+        
+         清空数组，把数组的长度设置为0
+        
+
+         
+         */
+        function Stack() {
+            this.dataStore = [];
+            this.top = 0;
+            this.push = push; // 入棧操作
+            this.pop = pop; // 出棧操作
+            this.peek = peek; // 
+            this.length = length;
+            this.clear = clear;
+        }
+        function push(element) {
+            // 每次只能push一個數據
+            this.dataStore[this.top++] = element;
+        }
+        function pop(){
+            // 這裏有兩步，返回棧頂元素以及數組長度減1，數組減少
+            // pop函數的底層原理
+            return this.dataStore[--this.top]
+        }
+        function peek() {
+            return this.dataStore[this.top - 1]
+        }
+
+        function length() {
+            return this.top;
+        }
+        function clear() {
+            this.top = 0 // 清楚以後返回，調用peek爲空
+        }
+
+
+        // 寫測試
+        let s = new Stack();
+        s.push('wen');
+        s.push('hui');
+        console.log(s.length(), s.peek(),s.pop());
+        console.log(s.length(), s.peek());
+        console.log(s.clear(),s.length());
+        s.push('hui','zi');
+        console.log(s.length(), s.peek());
+    </script>
+</body>
+
+</html>
