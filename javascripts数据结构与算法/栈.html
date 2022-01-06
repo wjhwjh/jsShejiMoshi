@@ -41,6 +41,7 @@
         }
 
         function length() {
+            //console.log(this.top);
             return this.top;
         }
         function clear() {
@@ -64,11 +65,65 @@
          實例
 
         */
+       // 案例1 數制簡的相互轉換
         function mulBase(num,base){
-            
+            if(!num)return '請輸入正確的數據'
+            var s = new Stack();
+            do{
+                s.push(num%base);
+                num =Math.floor(num/base);
+            }while(num>0)
+
+
+            var converted="";
+            while(s.length()>0){
+                converted += s.pop();
+            }
+
+            return converted
         }
+        // 測試數據
+        var num = 32;
+        var base = 2;
+        var newNum = mulBase(num,base);
+        console.log('十進制'+num+'轉化爲'+base+'是:'+newNum);
 
 
+        num = 125;
+        base = 8;
+        newNum = mulBase(num,base);
+        console.log('十進制'+num+'轉化爲'+base+'是:'+newNum);
+
+        num = 0;
+        base = 8;
+        newNum = mulBase(num,base);
+        console.log('十進制'+num+'轉化爲'+base+'是:'+newNum);
+        
+        // 案例2. 判斷給定的一個字符是否是回文字符串
+        function isPalindrome(word){
+            var s = new Stack();
+            for(var i=0;i<word.length;++i){
+                s.push(word[i])
+            }
+            
+            var rword = "";
+            while(s.length()>0){
+                rword += s.pop();
+            }
+
+            console.log('出棧后拼的數據--',rword);
+            if(word == rword){
+                return true
+            }else{
+                return false
+            }
+
+        }
+        var word = 'hello';
+        console.log(word +'是否是回文字符串:'+isPalindrome(word));
+
+        word = 'racecar';
+        console.log(word +'是否是回文字符串:'+isPalindrome(word));
     </script>
 </body>
 
