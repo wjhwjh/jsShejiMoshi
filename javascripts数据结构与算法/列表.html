@@ -10,8 +10,97 @@
     <script>
         /*
          列表數據結構
-        
+        實現列表類
         */
+        function List(){
+            this.listSize = 0; // 数组个数
+            this.pos=0; // 當前位置
+            this.dataStore=[];//初始化空數組 保存列表的元素
+            this.clear=clear; //清空方法
+            this.find=find; //查找
+            this.toString = toString; // 展示所有的
+            this.insert = insert; // 向前邊插入元素
+            this.append = append; //向后插入元素
+            this.remove = remove; //從列表中刪除元素
+            this.front = front; //將列表的當前位置移動到第一個元素
+            this.end = end; //將列表的當前位置移動到最後一個元素
+            this.pre = pre; // 將當前位置前移一位
+            this.next = next; //降檔位置後移一位
+
+            this.hasNext = hasNext; //判斷后一位
+            this.hasPre = hasPre; // 判斷前一位
+
+            this.currPos = currPos; //返回列表的當前位置
+            this.length = length; // 返回列表的長度
+            this.moveTo = moveTo; // 當前位置移動到指定位置 
+        }
+        
+        // 清空数组
+        function clear(){
+            //delete this.dataStore;
+           // console.log('删除后的数组--',this.dataStore);
+            //this.dataStore = [];
+            // 清空数组只需要把数组的长度设置为0
+            this.dataStore.length = 0;
+            this.listSize = this.pos = 0
+            //console.log('删除后的数组--',this.dataStore);
+        }
+        // 添加元素
+        function append(element){
+            console.log('数组个数1--',this.listSize);
+            this.dataStore[this.listSize++] = element;
+            console.log('数组个数2--',this.listSize);
+        }
+
+        // 查看数组元素
+        function toString(){
+            return this.dataStore
+        }
+
+        // 向前插入数据
+        function insert(){}
+
+        //删除数据
+        function remove(){}
+
+        // 移动到第一个位置
+        function front(){}
+
+        //移动到最后一个元素
+        function end(){}
+
+        //当前位置向前移
+        function pre(){}
+
+        // 当前位置向后移
+        function next(){}
+
+        // 判断后一位
+        function hasNext(){}
+
+        //判断前一位
+        function hasPre(){}
+
+        //返回当前位置
+        function currPos(){}
+
+        //移动到指定的位置
+        function moveTo(){
+
+        }
+
+        // 返回长度
+        function length(){
+            return this.listSize
+        }
+          
+       // 测试数据
+       let names = new List();
+       names.append('wen');
+       console.log('插入后的数据:',names.toString());
+       names.clear();
+       console.log('删除后的数据:',names.toString());
+
     </script>
 </body>
 </html>
