@@ -1,0 +1,4 @@
+windows查看是否安装Vue-cli
+Win+R
+输入cmd
+输入vue -V
