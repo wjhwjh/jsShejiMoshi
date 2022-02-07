@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>插入排序</title>
+</head>
+
+<body>
+    <script>
+
+        function dispArr(arr) {
+            let putstr = "";
+            for (let i = 0; i < arr.length; ++i) {
+                if (i % 10 == 9) {
+                    console.log(putstr + '\n\t');
+                    //console.log("");
+                    putstr = "";
+                } else {
+                    putstr += arr[i] + ' ';
+                }
+            }
+        }
+        let nums = [];
+        for (let i = 0; i < 100; ++i) {
+            nums[i] = Math.floor(Math.random() * 101)
+        }
+        dispArr(nums);
+        console.log('--', nums);
+
+        // 插入排序 算法
+        function insertSort(arr) {
+            let temp, inner;
+            for (let outer = 1; outer <= arr.length - 1; outer++) {
+                temp = arr[outer];
+                inner = outer;
+                while (inner > 0 && (arr[inner - 1]) > temp) {
+                    arr[inner] = arr[inner - 1];
+                    inner--;
+                }
+                arr[inner] = temp
+            }
+            return arr
+        }
+        console.log(dispArr(insertSort(nums)));
+
+    </script>
+</body>
+
+</html>

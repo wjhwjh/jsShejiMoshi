@@ -12,13 +12,15 @@
     <script>
         /*
         
-        冒泡排序,
+        冒泡排序 - 性能最慢的,
+        选择排序,
+        插入排序 - 性能最高
+        
         */
         function bubbleSort(arr) {
-            debugger;
+            //debugger;
             let numElement = arr.length;
             var temp;
-
             /*
               outer 3  
               inner 0 1 2
@@ -29,7 +31,9 @@
             */
             for (let outer = numElement; outer >= 2; --outer) {
                 console.log('outer:', outer);
-                for (let inner = 0; inner < outer - 1; ++inner) {
+                for (let inner = 0; inner <= outer - 2; ++inner) {
+                    debugger;
+                    console.log('outer1:', outer);
                     console.log('inner:', inner, arr[inner + 1])
                     if (arr[inner] > arr[inner + 1]) {
                         swap(arr, inner, inner + 1)

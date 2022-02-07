@@ -1,12 +1,41 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>选择排序</title>
 </head>
+
 <body>
-    <script></script>
+    <script>
+        /*
+          每次内层选择出最大或者最小的,与当前外层循环中当前位置交换
+        */
+        function selectedSort(arr) {
+            let min, temp;
+            //let outer = arr.length;
+            for (let outer = 0; outer <= arr.length - 2; outer++) { //对于循环边界值的处理
+                min = outer;
+                for (let inner = outer + 1; inner <= arr.length-1; inner++) {
+                    if (arr[inner] > arr[min]) {
+                        min = inner
+                    }
+                }
+                console.log('min:',min);
+                [arr[outer], arr[min]] = [arr[min], arr[outer]]
+            }
+            return arr
+        }
+
+        let nums = [];
+        for (let i = 0; i < 100; ++i) {
+            nums[i] = Math.floor(Math.random() * 101)
+        }
+        console.log(selectedSort(nums));
+
+    </script>
 </body>
+
 </html>

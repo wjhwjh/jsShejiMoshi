@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       // graph
+
+       function graph(v){
+           this.vertices = v; // 顶点的个数
+           this.vertexList=[]; // 将各个顶点关联到一个符号
+           this.edges=0; // 存放边数
+           this.adj=[]; // 存放边顶点
+           for(var i=0; i<this.vertices;i++){
+               this.adj[i]=[];
+               this.adj[i].push('');
+           }
+           this.addEdge = addEdge;
+           this.showGraph = showGraph;
+
+           this.dfs = dfs; // 深度遍历
+           this.marked = []; // 节点标记数组
+           for(let i=0; i<this.vertices; i++){ // 默认所有节点都未访问
+               this.marked[i] = false;
+           }
+
+           this.bfs = bfs; // 广度遍历
+           this.edgeTo = [];
+           this.hasPathTo = hasPathTo; // 辅助函数,顶点是否被访问过
+           this.topSortHelper = topSortHelper;
+           this.topSort = topSort;
+       }
+
+       // 添加顶点
+       function addEdge(v,w){
+           this.adj[v].push(w);
+           this.adj[w].push(v);
+           this.edges++; // 边数增加1
+       }
+
+       // 
+
+
+
+    </script>
+</body>
+</html>
