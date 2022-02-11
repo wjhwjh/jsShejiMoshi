@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <div id="app">
+        {{msg}}
+        <button class='btn' @click='btnHandler'>组件</button>
+        <child-box v-if='isShow' ref='childBox'></child-box>
+    </div>
+</head>
+<body>
+    <script src="./vue.js"></script>
+    <script>
+    
+       // console.log(new Vue())
+       // 先申明子组件
+       Vue.component('child-box',{
+           data(){
+               return{
+
+               }
+           },
+            template:`
+                <div>这是一个子组件,用来做测试用</div>
+            `,
+            beforeCreate(){},
+           created(){},
+           beforeMount(){},
+           mounted(){
+            //console.log('---',this.$refs)
+           },
+           beforeUpdate(){},
+           upDate(){},
+           beforeDestroy(){
+               console.log('2组件销毁之后---',this)
+           },
+           destroyed(){
+               console.log('2组件销毁之前---',this)
+           },
+           activeed(){},
+           deactived(){ // 组件失活
+
+           } 
+        });
+
+       let vm = new Vue({
+            el:'#app',
+            data(){
+                return {
+                    msg:'这是一个父组件',
+                    isShow:true
+                }
+            },
+            // components:{
+            //     VChild
+            // },
+            // template:`
+            //     <div>
+            //         {{msg}}
+            //         <div ref='main'>DOM</div>
+            //         <button class='btn' @click='btnHandler'>组件</button>
+            //         <VChild v-if='isShow' ref='vchild'></VChild>
+            //     </div>
+            // `,
+           methods:{
+            btnHandler(){
+                this.isShow = !this.isShow;
+            }
+           }, 
+           mounted(){
+               this.$nextTick(()=>{
+                console.log('aaa---',this.$refs.childBox)
+               });
+            
+           },
+           beforeDestroy(){
+               console.log('1组件销毁之后---',this.$refs.childBox)
+           },
+           destroyed(){
+               console.log('1组件销毁之前---',this.$refs.childBox)
+           },
+           
+
+        });
+
+    
+    </script>
+</body>
+</html>
