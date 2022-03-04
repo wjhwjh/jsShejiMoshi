@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+    <script src="./vue.js"></script>
+    <script src="./vueRouter.js"></script>
+    <script>
+        /*
+          vue是SPA(single page application) 单页面应用
+
+          new VueRouter() 路由返回的是一个对象
+
+          先挂在到vue原型上, 自定义的路由挂载到创建的vue实例上,便可使用
+
+        */
+        let Login={
+            created(){
+                console.log('路径--',this.$route);
+            },
+            template:`
+                <div>
+                    登录 
+                </div>
+            `
+        }
+
+        console.log(new VueRouter());  
+        let router = new VueRouter({ // 这里定义的路由变量名是固定的router,其它的则会报错
+            routes:[{
+                path:'/login/:id',
+                name:'login',
+                component:Login
+            }]
+        });
+        console.log(new Vue());
+
+
+        let App={
+            data(){
+                return {
+
+                }
+            },
+            created(){
+                // 定义的路由是在options里边的
+                console.log('生命周期中的路由--',this.$router.options)
+            },
+            template:`
+                <div>
+                    主要内容 
+                    <router-link :to="{path:'/login',query:{userid:1}}">登录</router-link> 
+                    // <router-link :to="{name:'login',parmas:{userid:1}}">登录1</router-link> 
+                    <router-view></router-view>
+                </div>
+            `
+        }
+        
+        let vm = new Vue({
+            el:'#app',
+            router,
+            components:{
+                App
+            },
+            template:`<App/>`,
+           
+        });
+    </script>
+</body>
+</html>
