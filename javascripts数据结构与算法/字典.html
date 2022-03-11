@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+         统计一个字符串中,每个单词出现的次数
+        */
+        let str = "the brown fox jumped over the blue fox";
+        // 使用对象
+        let obj = {};
+        str.split(' ').filter(item => {
+            if (obj[item]) {
+                obj[item] += 1;
+            } else {
+                obj[item] = 1;
+            }
+        });
+        console.log(obj);
+
+        // 使用字典
+        /*
+         字典类的基础是数组,因此有数组数组的一些特性,但数组也是一种特殊的对象,因此字典也是对象.
+         从形式上是介于数组和对象之间的一种数据结构
+         * 添加方式
+         * 没有length属性
+         */
+        let datastore = [];
+        function add(key, value) {
+            datastore[key] = value;
+        }
+        // 拥有Object.keys()方法的
+        
+    </script>
+</body>
+
+</html>
