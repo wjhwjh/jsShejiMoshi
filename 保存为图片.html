@@ -6,7 +6,7 @@
     <meta charset="utf-8">
 </head>
 
-<body class="Body">
+<body class="Body" id="body">
     <div class="AllWrap relative">
 
         <button title="保存为图片" style="position: absolute;top:30px;left:100px;" onclick="saveCanvas()">保 存</button>
@@ -21,11 +21,17 @@
 <script src="https://blog-static.cnblogs.com/files/xieyongbin/html2canvas.min.js"></script>
 <script>
     function saveCanvas() {
-        html2canvas($(".Body")).then(function (canvas) {
+        html2canvas($("body")).then(function (canvas) {
+            debugger;
             var imgUri = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
             $("#download").attr("href", imgUri);
             console.log(imgUri);
+            let img = new Image();
+            img.src = imgUri;
+            document.getElementById("body").appendChild(img)
             document.getElementById("download").click();
+
+
         });
     }
 </script>
