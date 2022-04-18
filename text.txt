@@ -1,3 +1,16 @@
 https://github.com/TooBug/javascript.patterns/blob/master/chapter7.markdown
 
 https://www.jsv9000.app/ 运行工具
+
+git 
+回退代码都是本地提交
+回退代码
+git reset --hard <版本号7位数>
+
+回退到合并版本之前
+git reset --hard ORIG_HEAD
+
+
+git log 查看提交日志
+
+
