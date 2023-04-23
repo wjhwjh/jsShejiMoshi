@@ -1,0 +1,11 @@
+webpack -v
+npm init -y 
+webpack --entry ./a.js -o dist
+webpack --entry ./a.js -o dist --mode=none/development/production
+
+path.resolve() 将接收的参数解析成一个绝对路径后返回
+
+
+绝对路径与相对路径的解说
+https://blog.csdn.net/m0_54721895/article/details/122849936
+
