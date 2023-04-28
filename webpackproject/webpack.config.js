@@ -1,4 +1,5 @@
 const path=require('path')
+console.log(process.env.AA_ENV)
 //
 console.log(__dirname)
 module.exports={

@@ -8,4 +8,19 @@ path.resolve() 将接收的参数解析成一个绝对路径后返回
 
 绝对路径与相对路径的解说
 https://blog.csdn.net/m0_54721895/article/details/122849936
+go.js 去掉水印 
+https://www.cnblogs.com/cz-xjw/p/16276148.html 
 
+--save-dev 等同于 --D  开发阶段依赖,依赖包名称加入到package.json文件的devDependencies下
+--save 或 --S  生产阶段依赖 ,依赖包名称加入到配置文件dependencies下
+npm install 会下载到dependencies和devDependencies下
+
+删除模块
+npm uninstall 会删除模块,但是不删除留在package.json里的信息??? 没有所有文件里的信息
+
+npm uninstall --save
+npm uninstall --save-dev 
+
+
+第6章
+webpack生产环境配置
